@@ -1,0 +1,20 @@
+source-directory /etc/network/interfaces.d
+
+# interfaces(5) file used by ifup(8) and ifdown(8)
+auto lo
+iface lo inet loopback
+
+#configure interfaces
+auto wlan0
+iface wlan0 inet manual
+	mtu 1532
+	wireless-channel 1
+	wireless-essid my-mesh-network
+	wireless-mode ad-hoc
+	wireless-ap 02:12:34:56:78:9A
+
+#configure bat0
+auto bat0
+iface bat0 inet6 auto
+	pre-up /usr/sbin/batctl if add eth0
+	pre-up /usr/sbin/batctl if add wlan0
